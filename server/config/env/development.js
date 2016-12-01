@@ -8,7 +8,7 @@ module.exports = {
 	},
 	db: {
 		host: 'localhost',
-		name: 'booking-agent',
+		name: 'bunker2',
 		port: '27017'
 	},
 	googleAuth: {

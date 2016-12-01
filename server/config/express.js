@@ -28,6 +28,7 @@ app.use(bodyParser.json());
 app.use(require('../responses/serverError'));
 app.use(require('../responses/ok'));
 app.use(require('../responses/badRequest'));
+app.use(require('../responses/unauthorized'));
 
 // setup routes
 require('./routes').http(app);

@@ -1,6 +1,6 @@
 {
-  "name": "express-seed",
-  "version": "1.0.0",
+  "name": "bunker2",
+  "version": "2.0.0",
   "description": "",
   "scripts": {
     "start": "node node_modules/gulp/bin/gulp.js && node app.js",
@@ -22,7 +22,10 @@
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "lodash": "^4.16.4",
-    "mongoose": "^4.6.3"
+    "moment": "^2.17.0",
+    "mongoose": "^4.6.3",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.16.0",
