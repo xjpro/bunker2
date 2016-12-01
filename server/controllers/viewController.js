@@ -1,10 +1,17 @@
+var viewController = module.exports;
 var config = require('../config');
 
-module.exports.login = (req, res) => {
+viewController.login = (req, res) => {
 	res.render('login', {
 		googleAuthClientId: config.googleAuth.clientId
 	});
 };
-module.exports.index = (req, res) => {
+
+viewController.logout = (req, res) => {
+	req.session.destroy();
+	res.redirect('/login');
+};
+
+viewController.index = (req, res) => {
 	res.render('index');
 };
