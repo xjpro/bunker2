@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
-var config = require('./config');
+var config = require('../config');
 
 // put publicly accessible directories here
 app.use('/dist', express.static('dist'));
@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 // Enable responses
 app.use(require('../responses/serverError'));
 app.use(require('../responses/ok'));
-app.use(require('../responses/invalid'));
+app.use(require('../responses/badRequest'));
 
 // setup routes
 require('./routes').http(app);

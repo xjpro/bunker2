@@ -10,5 +10,8 @@ module.exports = {
 		host: 'localhost',
 		name: 'booking-agent',
 		port: '27017'
+	},
+	googleAuth: {
+		clientId: '881998390132-5cl63riaq9btho8ruq9f897h5scv8ran.apps.googleusercontent.com'
 	}
 };
