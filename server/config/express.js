@@ -32,6 +32,5 @@ app.use(require('../responses/unauthorized'));
 
 // setup routes
 require('./routes').http(app);
-require('./routes').socket(app);
 
 module.exports = app;

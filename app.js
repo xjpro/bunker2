@@ -10,6 +10,7 @@ mongoose.Promise = Promise;
 
 var app = Promise.promisifyAll(require('./server/config/express'));
 var server = Promise.promisifyAll(require('http').Server(app));
+require('./server/config/socketio')(server);
 
 console.log(`server\t starting in ${config.environment} mode...`);
 

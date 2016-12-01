@@ -9,4 +9,4 @@ var schema = new mongoose.Schema({
 	}
 });
 
-module.exports = mongoose.model('Channel', schema);
+module.exports = mongoose.model('Room', schema);

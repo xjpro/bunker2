@@ -9,7 +9,8 @@ var userSchema = new mongoose.Schema({
 	},
 	email: {
 		type: String
-	}
+	},
+	sockets: Array
 });
 
 module.exports = mongoose.model('User', userSchema);
