@@ -18,7 +18,7 @@ gulp.task('build', [
 
 gulp.task('watch', ['build'], () => {
 	gulp.watch('./assets/**/*.scss', ['sass']); // watch sass changes
-	gulp.watch(['./app/**/*.js', '!./app/**/*.spec.js'], ['bundle-js']); // watch app js changes
+	gulp.watch(['./app/**/*.js*', '!./app/**/*.spec.js'], ['bundle-js']); // watch app js changes
 });
 
 gulp.task('clean', cb => {
@@ -30,14 +30,23 @@ gulp.task('clean-sass', cb => {
 });
 
 gulp.task('move-assets', ['clean'], () => {
-	return gulp.src(['./assets/fonts/**/*.*','./assets/images/*.*'])
+	return gulp.src(['./assets/fonts/**/*.*', './assets/images/*.*', './app/entry.js'])
 		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('bundle-js', () => {
-	return gulp.src(['./app/**/*.js', '!./app/**/*.spec.js'])
-		.pipe(babel({presets: ['es2015']}))
-		.pipe(concat('app-bundle.js'))
+	return gulp.src([
+		'./app/**/*.js*',
+		'!./app/entry.js',
+		'!./app/**/*.spec.js'
+	])
+		.pipe(sourceMaps.init())
+		.pipe(concat('app-components.jsx'))
+		.pipe(babel({
+			presets: ['es2015'],
+			plugins: ['transform-react-jsx']
+		}))
+		.pipe(sourceMaps.write())
 		.pipe(gulp.dest('./dist'));
 });
 
