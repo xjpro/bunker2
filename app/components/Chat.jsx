@@ -8,7 +8,6 @@ class Chat extends React.Component {
 
 	componentWillMount() {
 		bunkerData.subscribe('userUpdated', () => {
-			console.log('bd told me user updated yaty');
 			this.setState({
 				user: bunkerData.user
 			});
@@ -19,6 +18,8 @@ class Chat extends React.Component {
 		return (
 			<div>
 				{!this.state.user._id ? <Login/> : null}
+				<RoomList/>
+				<MessageList/>
 			</div>
 		);
 	}

@@ -1,7 +1,9 @@
 class RoomList extends React.Component {
 	render() {
 		return (
-			<div>rooms</div>
+			<div id="room-list">
+				rooms
+			</div>
 		);
 	}
 }
