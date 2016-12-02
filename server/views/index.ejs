@@ -12,6 +12,9 @@
 <script src="/node_modules/react/dist/react-with-addons.js"></script>
 <script src="/node_modules/react-dom/dist/react-dom.js"></script>
 <script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
+<script>
+    window.socket = window.io('localhost'); // so everyone shares it
+</script>
 <script src="/dist/bunkerData.js"></script>
 <script src="/dist/bunkerComponents.js"></script>
 <script src="/dist/bunkerListener.js"></script>
