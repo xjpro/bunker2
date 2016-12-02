@@ -7,7 +7,6 @@ var config = require('../config');
 var User = require('../models/User');
 
 userService.getUserByToken = token => {
-	console.log(token);
 	// Verify token with Google
 	return request({
 		uri: `https://www.googleapis.com/oauth2/v3/tokeninfo`,

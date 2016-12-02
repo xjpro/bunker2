@@ -1,25 +1,23 @@
-window.bunkerData = () => {
-	var socket = io('http://localhost');
-	socket.on('connect', () => {
-		console.log('socket connected');
-		if (!localStorage.token) {
-			// show login modal
-		}
-		else {
-			socket.emit('login', {token: localStorage.token});
-		}
-	});
-	socket.on('disconnect', () => {
-		console.log('socket disconnected');
-	});
-	socket.on('loggedIn', () => {
-		// Close login modal
-		socket.emit('init', () => {
+window.bunkerData = {
+	// Data
+	user: {},
+	rooms: [],
 
-		});
-	});
+	// Internal
+	_subscribers: [],
 
-	socket.on('init', data => {
-		console.log(data);
-	});
+	// Pub/sub
+	subscribe(event, callback) {
+		if (!this._subscribers[event]) this._subscribers[event] = [];
+		this._subscribers[event].push(callback);
+	},
+	unsubscribe(event) {
+		// todo implement unsub
+	},
+
+	// Events
+	updateUser(userData) {
+		this.user = userData;
+		this._subscribers['userUpdated'].forEach(callback => callback());
+	}
 };

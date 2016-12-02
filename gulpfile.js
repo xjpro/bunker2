@@ -54,7 +54,7 @@ gulp.task('bundle-js', () => {
 		'./app/*.js'
 	])
 		.pipe(sourceMaps.init())
-		.pipe(concat('bunkerApp.js'))
+		//.pipe(concat('bunkerApp.js'))
 		.pipe(babel({
 			presets: ['es2015']
 		}))

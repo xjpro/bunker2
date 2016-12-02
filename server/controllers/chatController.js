@@ -2,25 +2,21 @@ var chatController = module.exports;
 
 var User = require('../models/User');
 var RoomMember = require('../models/RoomMember');
-var userService = require('../services/userService');
 
-chatController.init = (socket, data) => {
-	return userService.getUserByToken(data.token)
-		.then(user => {
-			console.log(user);
-			socket.emit('init', user);
+chatController.init = (socket) => {
+	if (!socket.user) throw new Error('not logged in!');
+
+	return Promise.join(
+		User.findById(socket.user._id),
+		RoomMember.find({user: socket.user._id}).populate('room')
+	)
+		.spread((user, memberships) => {
+			return {
+				user,
+				rooms: _.map(memberships, 'room')
+			};
+		})
+		.then(initialData => {
+			socket.emit('initialData', initialData)
 		});
-
-	// return Promise.join(
-	// 	User.findById(req.session.user._id),
-	// 	RoomMember.find({user: req.session.user._id}).populate('room')
-	// )
-	// 	.spread((user, memberships) => {
-	// 		return {
-	// 			user,
-	// 			rooms: _.map(memberships, 'room')
-	// 		};
-	// 	})
-	// 	.then(res.ok)
-	// 	.catch(res.serverError);
 };
