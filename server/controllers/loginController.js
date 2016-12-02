@@ -1,20 +1,20 @@
 var loginController = module.exports;
 
+var User = require('../models/User');
 var userService = require('../services/userService');
 
-loginController.login = (req, res) => {
-	var token = req.body.token;
+loginController.login = (socket, data) => {
+	var token = data.token;
 	if (!token) {
-		return res.badRequest({
-			errors: [{code: '400', title: 'Token was not present'}]
-		});
+		// todo reject login!
 	}
-
 	return userService.getUserByToken(token)
 		.then(user => {
 			req.session.authenticated = true;
 			req.session.user = user;
-			res.ok({redirectTo: '/'});
+			return User.findByIdAndUpdate(user._id, {sockets: [socket.id]});
 		})
-		.catch(res.serverError);
+		.then(() => {
+			socket.emit('loggedIn', {});
+		});
 };

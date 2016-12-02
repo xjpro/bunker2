@@ -2,13 +2,16 @@
 <html>
 <head>
     <title>Chat > Bunker</title>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="<%= googleAuthClientId %>">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
 <div id="bunker"></div>
 <script src="/node_modules/react/dist/react-with-addons.js"></script>
 <script src="/node_modules/react-dom/dist/react-dom.js"></script>
 <script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
-<script src="/dist/app-components.js"></script>
-<script src="/dist/entry.js"></script>
+<script src="/dist/bunkerComponents.js"></script>
+<script src="/dist/bunkerApp.js"></script>
 </body>
 </html>

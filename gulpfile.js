@@ -12,13 +12,14 @@ gulp.task('default', ['build']);
 gulp.task('build', [
 	'clean',
 	'move-assets',
+	'bundle-jsx',
 	'bundle-js',
 	'sass'
 ]);
 
 gulp.task('watch', ['build'], () => {
 	gulp.watch('./assets/**/*.scss', ['sass']); // watch sass changes
-	gulp.watch(['./app/**/*.js*', '!./app/**/*.spec.js'], ['bundle-js']); // watch app js changes
+	gulp.watch(['./app/**/*.js*', '!./app/**/*.spec.js'], ['bundle-jsx', 'bundle-js']); // watch app js changes
 });
 
 gulp.task('clean', cb => {
@@ -30,21 +31,32 @@ gulp.task('clean-sass', cb => {
 });
 
 gulp.task('move-assets', ['clean'], () => {
-	return gulp.src(['./assets/fonts/**/*.*', './assets/images/*.*', './app/entry.js'])
+	return gulp.src(['./assets/fonts/**/*.*', './assets/images/*.*'])
 		.pipe(gulp.dest('dist'));
+});
+
+gulp.task('bundle-jsx', () => {
+	return gulp.src([
+		'./app/components/*.jsx'
+	])
+		.pipe(sourceMaps.init())
+		.pipe(concat('bunkerComponents.jsx'))
+		.pipe(babel({
+			presets: ['es2015'],
+			plugins: ['transform-react-jsx']
+		}))
+		.pipe(sourceMaps.write())
+		.pipe(gulp.dest('./dist'));
 });
 
 gulp.task('bundle-js', () => {
 	return gulp.src([
-		'./app/**/*.js*',
-		'!./app/entry.js',
-		'!./app/**/*.spec.js'
+		'./app/*.js'
 	])
 		.pipe(sourceMaps.init())
-		.pipe(concat('app-components.jsx'))
+		.pipe(concat('bunkerApp.js'))
 		.pipe(babel({
-			presets: ['es2015'],
-			plugins: ['transform-react-jsx']
+			presets: ['es2015']
 		}))
 		.pipe(sourceMaps.write())
 		.pipe(gulp.dest('./dist'));
