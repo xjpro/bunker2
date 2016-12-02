@@ -19,6 +19,7 @@
 
 		// Incoming events
 		init(initialData) {
+			console.log(initialData);
 			this.user = initialData.user;
 			subscribers.userUpdated.forEach(callback => callback());
 		},

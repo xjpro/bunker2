@@ -7,8 +7,7 @@ var schema = new mongoose.Schema({
 	},
 	room: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Room',
-		index: true
+		ref: 'Room'
 	}
 });
 

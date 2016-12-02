@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-	channel: {
+	rooms: [{
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Channel'
-	},
+		ref: 'Room'
+	}],
 	name: {
 		type: String,
 		required: true,
@@ -13,4 +13,4 @@ var schema = new mongoose.Schema({
 	}
 });
 
-module.exports = mongoose.model('Room', schema);
+module.exports = mongoose.model('Channel', schema);

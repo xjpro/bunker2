@@ -2,13 +2,11 @@ class RoomList extends React.Component {
 	render() {
 		return (
 			<div>
-				<ol className="list-unstyled">
-					<li>
-						<a>
-							Create room...
-						</a>
-					</li>
-				</ol>
+				<div className="list-group">
+					<a className="list-group-item">
+						Create room...
+					</a>
+				</div>
 			</div>
 		);
 	}
