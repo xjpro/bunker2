@@ -1,23 +1,31 @@
-window.bunkerData = {
-	// Data
-	user: {},
-	rooms: [],
+(function (socket) {
+	let subscribers = [];
 
-	// Internal
-	_subscribers: [],
+	window.bunkerData = {
+		// Data
+		user: {},
+		rooms: [],
 
-	// Pub/sub
-	subscribe(event, callback) {
-		if (!this._subscribers[event]) this._subscribers[event] = [];
-		this._subscribers[event].push(callback);
-	},
-	unsubscribe(event) {
-		// todo implement unsub
-	},
+		// Pub/sub
+		subscribe(event, callback) {
+			if (!subscribers[event]) subscribers[event] = [];
+			subscribers[event].push(callback);
+		},
+		unsubscribe(event) {
+			// todo implement unsub
+		},
 
-	// Events
-	updateUser(userData) {
-		this.user = userData;
-		this._subscribers['userUpdated'].forEach(callback => callback());
-	}
-};
+		// Events
+		init(initialData) {
+			this.user = initialData.user;
+			subscribers['userUpdated'].forEach(callback => callback());
+		},
+		createMessage(roomId, messageText) {
+			socket.emit('message', {
+				room: roomId,
+				text: messageText
+			});
+		}
+	};
+
+})(window.io('localhost'));
