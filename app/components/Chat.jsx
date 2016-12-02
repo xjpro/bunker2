@@ -18,8 +18,18 @@ class Chat extends React.Component {
 		return (
 			<div>
 				{!this.state.user._id ? <Login/> : null}
-				<RoomList/>
-				<MessageList/>
+
+				<Header/>
+				<div className="container-fluid">
+					<div className="col-xs-2">
+						<RoomList/>
+					</div>
+					<div className="col-xs-8">
+						<MessageList/>
+					</div>
+					<div className="col-xs-2">
+					</div>
+				</div>
 			</div>
 		);
 	}

@@ -1,7 +1,7 @@
 class MessageList extends React.Component {
 	render() {
 		return (
-			<div></div>
+			<div>lots of messages</div>
 		);
 	}
 }

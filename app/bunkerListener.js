@@ -1,8 +1,3 @@
-window.onSignIn = function (googleUser) {
-	localStorage.token = googleUser.getAuthResponse().id_token;
-	window.socket.emit('login', {token: localStorage.token});
-};
-
 (function bunkerListener(socket) {
 
 	function handleConnected(socket) {
