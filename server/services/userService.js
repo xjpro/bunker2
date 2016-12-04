@@ -5,6 +5,8 @@ var moment = require('moment');
 
 var config = require('../config');
 var User = require('../models/User');
+var Channel = require('../models/Channel');
+var ChannelMember = require('../models/ChannelMember');
 
 userService.getUserByToken = token => {
 	// Verify token with Google
@@ -24,9 +26,15 @@ userService.getUserByToken = token => {
 			return User.findOne({email: auth.email})
 				.then(user => {
 					if (user) return user;
-					return User.create({nick: auth.name, email: auth.email})
-						.then(() => {
-							// create membership of General room
+
+					// Create new user
+					return Promise.join(
+						User.create({nick: auth.name, email: auth.email}),
+						Channel.findOne() // first channel always 'General'
+					)
+						.spread((user, channel) => {
+							// Create membership in General channel
+							return ChannelMember.create({user, channel});
 						});
 				});
 		});

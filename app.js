@@ -22,6 +22,14 @@ mongoose.connect(databaseUrl)
 	})
 	.then(() => {
 		console.log(`server\t hosted at http://${config.express.ip}:${config.express.port}`);
+
+		// Create a first channel if necessary
+		return mongoose.model('Channel').count()
+			.then(channelCount => {
+				if(channelCount === 0) {
+					return mongoose.model('Channel').create({name: 'General'});
+				}
+			});
 	})
 	.catch(err => {
 		console.error(err);

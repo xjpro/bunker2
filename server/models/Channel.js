@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Room = require('./Room');
 
 var schema = new mongoose.Schema({
 	rooms: [{
