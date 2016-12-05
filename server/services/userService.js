@@ -37,6 +37,10 @@ userService.getUserByToken = token => {
 							return ChannelMember.create({user, channel});
 						});
 				});
+		})
+		.catch(err => {
+			if (err.statusCode === 400) return null;
+			throw err;
 		});
 };
 

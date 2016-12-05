@@ -12,6 +12,8 @@ loginController.login = (socket, data) => {
 	return userService.getUserByToken(token)
 		.then(user => {
 			socket.user = user;
-			socket.emit('loggedIn');
+			if (user) {
+				socket.emit('loggedIn');
+			}
 		});
 };
