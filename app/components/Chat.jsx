@@ -20,14 +20,12 @@ class Chat extends React.Component {
 				{!this.state.user._id ? <Login/> : null}
 
 				<Header/>
-				<div className="container-fluid">
-					<div className="col-xs-2">
-						<RoomList/>
-					</div>
-					<div className="col-xs-8">
+				<div>
+					<ChannelList/>
+					<div id="message-list">
 						<MessageList/>
 					</div>
-					<div className="col-xs-2">
+					<div id="member-list">
 					</div>
 				</div>
 			</div>

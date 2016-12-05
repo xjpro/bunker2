@@ -1,3 +1,14 @@
 .show {
 	display: initial;
 }
+
+#channel-list {
+	float: left;
+	width: 80px;
+}
+
+#room-list {
+	float: left;
+	width: 175px;
+	background-color: red;
+}

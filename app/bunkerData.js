@@ -1,13 +1,14 @@
 (function (socket) {
 	let subscribers = {
 		userUpdated: [],
+		channelsUpdated: [],
 		messageReceived: []
 	};
 
 	window.bunkerData = {
 		// Data
 		user: {},
-		rooms: [],
+		channels: [],
 
 		// Pub/sub
 		subscribe(event, callback) {
@@ -20,8 +21,9 @@
 		// Incoming events
 		init(initialData) {
 			console.log(initialData);
-			this.user = initialData.user;
+			_.assign(this, initialData);
 			subscribers.userUpdated.forEach(callback => callback());
+			subscribers.channelsUpdated.forEach(callback => callback());
 		},
 		messageReceived(data) {
 			_.find(this.rooms, {_id: data.room}).messages.push(data.text);
