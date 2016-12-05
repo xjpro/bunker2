@@ -10,7 +10,11 @@ var userSchema = new mongoose.Schema({
 	email: {
 		type: String
 	},
-	sockets: Array
+	sockets: Array,
+	currentChannel: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Channel'
+	}
 });
 
 module.exports = mongoose.model('User', userSchema);

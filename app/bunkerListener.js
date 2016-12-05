@@ -4,7 +4,7 @@
 		console.log('socket connected');
 		console.log(`oauth token is ${localStorage.token ? 'present' : 'not present'}`);
 		if (localStorage.token) {
-			socket.emit('login', {token: localStorage.token});
+			socket.emit('user.login', {token: localStorage.token});
 		}
 	}
 
@@ -14,10 +14,11 @@
 	let events = {
 		connect: handleConnected,
 		disconnect: handleDisconnected,
-		loggedIn: () => socket.emit('init'),
-		initialData: (socket, data) => bunkerData.init(data),
-		message: (socket, data) => bunkerData.messageReceived(data),
-		edit: (socket, data) => bunkerData.messageEdited(data)
+		'user.loggedIn': () => socket.emit('chat.init'),
+		'chat.initialData': (socket, data) => bunkerData.init(data),
+		'channel.updated': (socket, data) => bunkerData.channelUpdated(data),
+		'room.messageCreated': (socket, data) => bunkerData.messageReceived(data),
+		'room.messageEdited': (socket, data) => bunkerData.messageEdited(data)
 	};
 
 	// We can listen for events now!

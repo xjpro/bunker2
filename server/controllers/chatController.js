@@ -21,6 +21,6 @@ chatController.init = (socket) => {
 			return {user, channels};
 		})
 		.then(initialData => {
-			socket.emit('initialData', initialData)
+			socket.emit('chat.initialData', initialData)
 		});
 };

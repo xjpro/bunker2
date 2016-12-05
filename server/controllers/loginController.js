@@ -13,7 +13,7 @@ loginController.login = (socket, data) => {
 		.then(user => {
 			socket.user = user;
 			if (user) {
-				socket.emit('loggedIn');
+				socket.emit('user.loggedIn');
 			}
 		});
 };

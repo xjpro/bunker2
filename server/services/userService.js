@@ -34,7 +34,11 @@ userService.getUserByToken = token => {
 					)
 						.spread((user, channel) => {
 							// Create membership in General channel
-							return ChannelMember.create({user, channel});
+							return ChannelMember.create({user, channel})
+								.then(() => {
+									user.currentChannel = channel;
+									return user.save();
+								});
 						});
 				});
 		})

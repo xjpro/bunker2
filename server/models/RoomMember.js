@@ -8,7 +8,12 @@ var schema = new mongoose.Schema({
 	room: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Room'
-	}
+	},
+	role: {
+		type: String,
+		enum: ['member', 'moderator', 'administrator'],
+		default: 'member'
+	},
 });
 
 module.exports = mongoose.model('RoomMember', schema);
