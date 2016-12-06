@@ -1,11 +1,6 @@
-var React = require('react');
+import React from 'react';
 
-window.onSignIn = googleUser => {
-	localStorage.token = googleUser.getAuthResponse().id_token;
-	window.socket.emit('login', {token: localStorage.token});
-};
-
-module.exports = React.createClass({
+export default class Login extends React.Component {
 	render() {
 		return (
 			<div className="modal show">
@@ -21,4 +16,4 @@ module.exports = React.createClass({
 			</div>
 		);
 	}
-});
+}

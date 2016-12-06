@@ -1,7 +1,11 @@
+// Include SASS styling
 require('./style/base.scss');
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Chat = require('./components/Chat.jsx');
+import React from 'react';
+import ReactDOM  from 'react-dom';
+import Chat from './components/Chat.jsx';
 
-ReactDOM.render(React.createElement(Chat, null), document.getElementById('bunker'));
+ReactDOM.render(
+	React.createElement(Chat, null),
+	document.getElementById('bunker')
+);

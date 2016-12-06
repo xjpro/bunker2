@@ -1,7 +1,9 @@
-class RoomList extends React.Component {
+import React from 'react';
+
+export default class RoomList extends React.Component {
 
 	createRoom() {
-		bunkerData.createRoom();
+		//bunkerData.createRoom();
 	}
 
 	render() {
