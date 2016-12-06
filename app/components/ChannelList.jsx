@@ -1,35 +1,19 @@
-class ChannelList extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			channels: [],
-			channelRooms: []
-		};
-	}
+import React from 'react';
+import RoomList from './RoomList.jsx';
 
-	componentWillMount() {
-		bunkerData.subscribe('channelsUpdated', () => {
-			this.setState({
-				channels: bunkerData.channels,
-				channelRooms: bunkerData.currentChannel.rooms
-			});
-		});
-		bunkerData.subscribe('currentChannelChanged', () => {
-			this.setState({
-				channelRooms: bunkerData.currentChannel.rooms
-			});
-		});
-
-	}
+export default class ChannelList extends React.Component {
 
 	render() {
-		let channels = this.state.channels.map(channel => {
+		const channels = this.props.channels.map(channel => {
 			return (
 				<a className="list-group-item" key={channel._id}>
 					{channel.name}
 				</a>
 			);
 		});
+
+		const currentChannel = _.find(this.props.channels, {_id: this.props.user.currentChannel}) || _.first(this.props.channels);
+		const rooms = currentChannel ? currentChannel.rooms : [];
 
 		return (
 			<div>
@@ -39,7 +23,7 @@ class ChannelList extends React.Component {
 						Create channel...
 					</a>
 				</div>
-				<RoomList rooms={this.state.channelRooms}/>
+				<RoomList rooms={rooms}/>
 			</div>
 		);
 	}

@@ -1,6 +1,9 @@
 var socket = require('socket.io-client')('localhost'); // will connect the socket!!
 import UserStore from './stores/UserStore';
+import ChannelStore from './stores/ChannelStore';
 
+// TODO find a better way to attach this
+// Has to be available for Google Sign-in button
 global.onSignIn = googleUser => {
 	localStorage.token = googleUser.getAuthResponse().id_token;
 	socket.emit('login', {token: localStorage.token});
@@ -9,6 +12,7 @@ global.onSignIn = googleUser => {
 export default class ChatState {
 
 	userStore = new UserStore();
+	channelStore = new ChannelStore();
 
 	constructor() {
 		let events = {
@@ -44,8 +48,8 @@ export default class ChatState {
 	handleInitialData(data) {
 		console.log('received initial data payload');
 		console.log(data);
-		//_.assign(this.userStore.user, data.user);
 		this.userStore.user = data.user;
+		this.channelStore.channels = data.channels;
 	}
 
 }
