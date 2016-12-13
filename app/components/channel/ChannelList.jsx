@@ -1,5 +1,5 @@
 import React from 'react';
-import RoomList from './RoomList.jsx';
+import RoomList from '../room/RoomList.jsx';
 
 export default class ChannelList extends React.Component {
 

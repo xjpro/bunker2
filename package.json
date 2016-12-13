@@ -32,7 +32,8 @@
     "request": "2.79.0",
     "request-promise": "4.1.1",
     "socket.io": "1.7.1",
-    "socket.io-client": "1.7.1"
+    "socket.io-client": "1.7.1",
+    "ui-router-react": "^0.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
