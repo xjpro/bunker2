@@ -10,8 +10,8 @@ import chatStore from '../stores/ChatStore';
 @observer
 export default class ChatView extends React.Component {
 	render() {
-		const user = chatStore.userStore.user;
-		const channels = chatStore.channelStore.channels;
+		const user = chatStore.user;
+		const channels = chatStore.channels;
 		return (
 			<div>
 				{!user._id ? <Login/> : null}

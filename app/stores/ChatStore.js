@@ -1,6 +1,6 @@
 var socket = require('socket.io-client')('localhost'); // will connect the socket!!
-import UserStore from './UserStore';
-import ChannelStore from './ChannelStore';
+import {observable} from 'mobx';
+
 
 // TODO find a better way to attach this
 // Has to be available for Google Sign-in button
@@ -10,9 +10,8 @@ global.onSignIn = googleUser => {
 };
 
 class ChatStore {
-
-	userStore = new UserStore();
-	channelStore = new ChannelStore();
+	@observable user = {};
+	@observable channels = [];
 
 	constructor() {
 		let events = {
@@ -48,8 +47,8 @@ class ChatStore {
 	handleInitialData(data) {
 		console.log('received initial data payload');
 		console.log(data);
-		this.userStore.user = data.user;
-		this.channelStore.channels = data.channels;
+		this.user = data.user;
+		this.channels = data.channels;
 	}
 
 }
