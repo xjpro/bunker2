@@ -12,6 +12,7 @@ global.onSignIn = googleUser => {
 class ChatStore {
 	@observable user = {};
 	@observable channels = [];
+	__initiating = Promise.defer();
 
 	constructor() {
 		let events = {
@@ -32,6 +33,10 @@ class ChatStore {
 		});
 	}
 
+	initiated() {
+		return this.__initiating.promise;
+	}
+
 	handleConnected(socket) {
 		console.log('socket connected');
 		console.log(`oauth token is ${localStorage.token ? 'present' : 'not present'}`);
@@ -49,6 +54,7 @@ class ChatStore {
 		console.log(data);
 		this.user = data.user;
 		this.channels = data.channels;
+		this.__initiating.resolve(true);
 	}
 
 }
