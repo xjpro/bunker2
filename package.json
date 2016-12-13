@@ -3,9 +3,9 @@
   "version": "2.0.0",
   "description": "",
   "scripts": {
-    "start": "node node_modules/webpack/bin/webpack.js --config webpack.config.dev.js && node app.js",
-    "build": "node node_modules/webpack/bin/webpack.js --config webpack.config.dev.js && node app.js",
-    "postinstall": "node node_modules/webpack/bin/webpack.js --config webpack.config.dev.js"
+    "start": "node node_modules/webpack/bin/webpack.js --config webpack.config.js && node app.js",
+    "build": "node node_modules/webpack/bin/webpack.js --config webpack.config.js && node app.js",
+    "postinstall": "node node_modules/webpack/bin/webpack.js --config webpack.config.js"
   },
   "repository": {
     "type": "git",
