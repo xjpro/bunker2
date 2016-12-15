@@ -15,9 +15,6 @@ export default class ChannelList extends React.Component {
 			);
 		});
 
-		const currentChannel = _.find(this.props.channels, {_id: this.props.user.currentChannel}) || _.first(this.props.channels);
-		const rooms = currentChannel ? currentChannel.rooms : [];
-
 		return (
 			<div>
 				<div id="channel-list" className="list-group">
@@ -26,7 +23,7 @@ export default class ChannelList extends React.Component {
 						Create channel...
 					</a>
 				</div>
-				<RoomList rooms={rooms}/>
+				<RoomList rooms={this.props.rooms}/>
 			</div>
 		);
 	}

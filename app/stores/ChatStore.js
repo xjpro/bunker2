@@ -12,6 +12,7 @@ global.onSignIn = googleUser => {
 class ChatStore {
 	@observable user = {};
 	@observable channels = [];
+	@observable currentChannel;
 	__initiating = Promise.defer();
 
 	constructor() {

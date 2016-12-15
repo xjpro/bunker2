@@ -36,7 +36,6 @@ userService.getUserByToken = token => {
 							// Create membership in General channel
 							return ChannelMember.create({user, channel})
 								.then(() => {
-									user.currentChannel = channel;
 									return user.save();
 								});
 						});

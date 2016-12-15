@@ -51,11 +51,14 @@ const states = [
 		}
 	},
 	{
+		// Show a room
 		name: 'chat.room',
 		url: '/channel/:channelId/room/:roomId',
 		component: RoomView
 	}
 ];
+
+// TODO on state change, change 'currentChannel' and 'currentRoom'?
 
 states.forEach(state => router.stateRegistry.register(state));
 router.start();

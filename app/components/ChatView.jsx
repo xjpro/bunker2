@@ -12,13 +12,14 @@ export default class ChatView extends React.Component {
 	render() {
 		const user = chatStore.user;
 		const channels = chatStore.channels;
+		const rooms = chatStore.currentChannel ? chatStore.currentChannel.rooms : [];
 		return (
 			<div>
 				{!user._id ? <Login/> : null}
 				<Header/>
 				<div className="container-fluid">
 					<div className="col-xs-3">
-						<ChannelList channels={channels} user={user}/>
+						<ChannelList channels={channels} rooms={rooms}/>
 					</div>
 					<div className="col-xs-9">
 						<UIView/>
