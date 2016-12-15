@@ -1,5 +1,5 @@
 import React from 'react';
-import {UISref} from 'ui-router-react';
+import {Link} from 'react-router';
 
 export default class RoomList extends React.Component {
 
@@ -11,9 +11,9 @@ export default class RoomList extends React.Component {
 		let rooms = this.props.rooms.map(room => {
 			return (
 				<li key={room._id}>
-					<UISref to="chat.room" params={{channelId: room.channel, roomId: room._id}}>
-						<a>{room.name}</a>
-					</UISref>
+					<Link to={`/channel/${room.channel}/room/${room._id}`}>
+						{room.name}
+					</Link>
 				</li>
 			);
 		});

@@ -1,5 +1,5 @@
 import React from 'react';
-import {UISref} from 'ui-router-react';
+import {Link} from 'react-router';
 import RoomList from '../room/RoomList.jsx';
 
 export default class ChannelList extends React.Component {
@@ -7,11 +7,9 @@ export default class ChannelList extends React.Component {
 	render() {
 		const channels = this.props.channels.map(channel => {
 			return (
-				<UISref to="chat.channel" params={{channelId: channel._id}} key={channel._id}>
-					<a className="list-group-item">
-						{channel.name}
-					</a>
-				</UISref>
+				<Link to={`/channel/${channel._id}`} className="list-group-item" key={channel._id}>
+					{channel.name}
+				</Link>
 			);
 		});
 

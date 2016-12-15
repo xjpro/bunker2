@@ -1,5 +1,4 @@
 import React from 'react';
-import {UIView} from 'ui-router-react';
 import {observer} from 'mobx-react';
 import Login from './Login.jsx';
 import Header from './Header.jsx';
@@ -22,7 +21,7 @@ export default class ChatView extends React.Component {
 						<ChannelList channels={channels} rooms={rooms}/>
 					</div>
 					<div className="col-xs-9">
-						<UIView/>
+						{this.props.children}
 					</div>
 				</div>
 			</div>

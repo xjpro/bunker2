@@ -1,11 +1,12 @@
 import React from 'react';
 import chatStore from '../stores/ChatStore';
 
-export default class ChannelView extends React.Component {
+export default class UserView extends React.Component {
 	render() {
 		return (
 			<div>
-				I'm a room!
+				<h1>Welcome back</h1>
+				User details or something
 			</div>
 		);
 	}
