@@ -1,10 +1,12 @@
 import React from 'react';
+import {observer} from 'mobx-react';
 import chatStore from '../stores/ChatStore';
 
+@observer
 export default class Login extends React.Component {
 	render() {
 		return (
-			<div className={`modal ${chatStore.user._id ? 'show' : ''}`}>
+			<div className={`modal ${!chatStore.user._id ? 'show' : ''}`}>
 				<div className="modal-dialog">
 					<div className="modal-content">
 						<div className="modal-body">

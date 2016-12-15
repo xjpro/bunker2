@@ -19,8 +19,9 @@ class ChatStore {
 		let events = {
 			connect: (socket) => this.handleConnected(socket),
 			disconnect: (socket) => this.handleDisconnected(socket),
-			'user.loggedIn': () => socket.emit('chat.init'),
-			'chat.initialData': (socket, data) => this.handleInitialData(data),
+			'user.loggedIn': (socket, data) => this.handleLoggedIn(socket),
+			'user.loggedOut': (socket, data) => this.handleLoggedOut(socket),
+			'chat.initialData': (socket, data) => this.handleInitialData(socket, data),
 			//'channel.updated': (socket, data) => bunkerData.channelUpdated(data),
 			//'room.messageCreated': (socket, data) => bunkerData.messageReceived(data),
 			//'room.messageEdited': (socket, data) => bunkerData.messageEdited(data)
@@ -48,7 +49,17 @@ class ChatStore {
 		this.connected = false;
 	}
 
-	handleInitialData(data) {
+	handleLoggedIn(socket) {
+		console.log('logged in');
+		socket.emit('chat.init')
+	}
+
+	handleLoggedOut() {
+		console.log('logged out');
+		this.user = {};
+	}
+
+	handleInitialData(socket, data) {
 		console.log('received initial data payload');
 		console.log(data);
 		this.user = data.user;
