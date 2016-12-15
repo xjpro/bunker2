@@ -5,19 +5,20 @@ import {observable} from 'mobx';
 // Has to be available for Google Sign-in button
 global.onSignIn = googleUser => {
 	localStorage.token = googleUser.getAuthResponse().id_token;
-	socket.emit('login', {token: localStorage.token});
+	socket.emit('user.login', {token: localStorage.token});
 };
 
 class ChatStore {
 	@observable user = {};
 	@observable channels = [];
 	@observable currentChannel;
+	@observable connected = false;
 	@observable initiated = false;
 
 	constructor() {
 		let events = {
-			connect: this.handleConnected,
-			disconnect: this.handleDisconnected,
+			connect: (socket) => this.handleConnected(socket),
+			disconnect: (socket) => this.handleDisconnected(socket),
 			'user.loggedIn': () => socket.emit('chat.init'),
 			'chat.initialData': (socket, data) => this.handleInitialData(data),
 			//'channel.updated': (socket, data) => bunkerData.channelUpdated(data),
@@ -35,6 +36,7 @@ class ChatStore {
 
 	handleConnected(socket) {
 		console.log('socket connected');
+		this.connected = true;
 		console.log(`oauth token is ${localStorage.token ? 'present' : 'not present'}`);
 		if (localStorage.token) {
 			socket.emit('user.login', {token: localStorage.token});
@@ -43,6 +45,7 @@ class ChatStore {
 
 	handleDisconnected(socket) {
 		console.log('socket disconnected');
+		this.connected = false;
 	}
 
 	handleInitialData(data) {

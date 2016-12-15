@@ -1,6 +1,7 @@
 import React from 'react';
 import {observer} from 'mobx-react';
 import {Router, Route, IndexRoute, hashHistory} from 'react-router'
+import Login from './Login.jsx';
 import ChatView from './ChatView.jsx';
 import RoomView from './RoomView.jsx';
 import InboxView from './InboxView.jsx';
@@ -49,7 +50,10 @@ export default class App extends React.Component {
 		);
 
 		return (
-			chatStore.initiated ? routes : null
+			<div>
+				<Login/>
+				{chatStore.initiated ? routes : null}
+			</div>
 		);
 	}
 }

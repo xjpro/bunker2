@@ -1,9 +1,10 @@
 import React from 'react';
+import chatStore from '../stores/ChatStore';
 
 export default class Login extends React.Component {
 	render() {
 		return (
-			<div className="modal show">
+			<div className={`modal ${chatStore.user._id ? 'show' : ''}`}>
 				<div className="modal-dialog">
 					<div className="modal-content">
 						<div className="modal-body">
