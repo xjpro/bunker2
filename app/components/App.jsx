@@ -18,7 +18,7 @@ export default class App extends React.Component {
 	redirectToFirstChannelRoom(nextState, replace) {
 		let room = chatStore.channels[0] ? chatStore.channels[0].rooms[0] : null;
 		if (room) {
-			replace({pathname: `/channel/${room.channel}/room/${room._id}`});
+			return replace({pathname: `/channel/${room.channel}/room/${room._id}`});
 		}
 		replace({pathname: `/inbox`});
 	}
@@ -28,7 +28,7 @@ export default class App extends React.Component {
 		if (channel) {
 			let room = _.first(channel.rooms);
 			if (room) {
-				replace({pathname: `/channel/${room.channel}/room/${room._id}`});
+				return replace({pathname: `/channel/${room.channel}/room/${room._id}`});
 			}
 		}
 		replace({pathname: `/inbox`});
